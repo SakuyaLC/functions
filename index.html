@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="st_style.css" type="text/css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Second Task</title>
+</head>
+<body>
+    <div id="1stfunc">
+        <input type="button" onclick="StringLength()" value="Самая длинная строка" />
+        <script>
+            function StringLength() {
+                let max = -1, str, N;
+                var i = 0;
+
+                alert("Эта функция принимает массив строк и возвращает самую длинную из них.");
+
+                N = prompt("Укажите сколько строк вы хотите ввести.");
+
+                let arr = new Array(1);
+
+                for (i = 0; i < N; i++) {
+                    arr[i] = "a";
+                }
+
+                for (i = 0; i < N; i++) {
+                    arr[i] = prompt("Введите строку:");
+                    if (arr[i].length > max) str = arr[i];
+                }
+                console.log(str);
+                if (str === undefined) alert("Ошибка! Указывая, сколько строк вы хотели бы ввести, вы указали неправильный тип данных. Вводите туда число!")
+                else alert("Самая длинная строка:\n" + str);
+
+            }
+        </script>
+    </div>
+
+    <div id="2ndfunc">
+        <input type="button" onclick="MostUsedSymbol()" value="Частоиспользуемый символ" />
+        <script>
+            function MostUsedSymbol() {
+                let str, k = 0, max = 0, symbol;
+
+                alert("Эта функция принимает строку и возвращает самый частоиспользуемый символ.");
+
+                str = prompt("Введите строку.");
+
+                if (str === null || str === undefined || str === "") {
+                    alert("Вы не указали строку. Попробуйте еще раз.");
+                    MostUsedSymbol();
+                }
+
+                localStorage.setItem('strFR', str);
+
+                str = str.toLowerCase();
+                let arr = new Array(1);
+                arr = str.split('');
+                arr.sort();
+
+                for (i = 0; i < arr.length - 1; i++) {
+                    if (arr[i] == arr[i + 1]) k++;
+                    else if (k + 1 > max) {
+                        max = k + 1;
+                        symbol = arr[i];
+                        k = 0;
+                    }
+                }
+
+                if (str === null || str === undefined || symbol === null || symbol === undefined) {
+                    alert("Вы не указали строку. Попробуйте еще раз.");
+                    MostUsedSymbol();
+                }
+
+                else alert("Самый частоиспользуемый символ - " + symbol);
+
+                localStorage.setItem('symbolFR', symbol);
+
+            }
+        </script>
+    </div>
+
+    <div id="3rdfunc">
+        <input type="button" onclick="MUS_Replacer()" value="Замена ЧИС" />
+        <script>
+            function MUS_Replacer() {
+                let t, symbol = localStorage.getItem('symbolFR'), str = localStorage.getItem('strFR');
+                let arr = new Array(1000);
+
+                alert("Эта функция берет строку из предыдущей функции и заменяет самый частоиспользуемый символ, на введенный вами.");
+
+                t = prompt("Введите символ, которым хотите заменить самый частоиспользуемый символ в строке из предыдущей задачи.");
+
+                arr = str.split('');
+
+                console.log(localStorage.getItem('symbolFR'));
+
+                for (i = 0; i < arr.length; i++) {
+                    if (arr[i] == symbol) arr[i] = t;
+                }
+
+                arr = arr.join('');
+
+                if (t === null || t === "" || t === undefined) alert("Ошибка! Вы не ввели символ, которым вы хотите заменить самый частоиспользуемый символ в строке.")
+
+                else alert("Полученная строка:\n" + arr);
+            }
+        </script>
+    </div>
+
+    <div id="4thfunc">
+        <input type="button" onclick="IsAnagram()" value="Анаграммы" />
+        <script>
+            function IsAnagram() {
+                let str1, str2, k = 0;
+                let arr1 = new Array(1);
+                let arr2 = new Array(1);
+
+                alert("Эта функция принимает 2 строки и определяет являются ли они анаграммами.");
+
+                str1 = prompt("Введите первую строку.");
+                str2 = prompt("Введите вторую строку.");
+
+                if (str1 === null || str1 === undefined || str1 === "" || str1 === " " || str2 === null || str2 === undefined || str2 === "" || str2 === " ") {
+                    alert("Вы не указали одну из строк, попробуйте еще раз.");
+                    IsAnagram();
+                }
+
+                str1 = str1.toLowerCase();
+                str2 = str2.toLowerCase();
+
+                arr1 = str1.split('');
+                arr2 = str2.split('');
+
+                arr1.sort();
+                arr2.sort();
+
+                for (i = 0; i < arr1.length; i++) {
+                    if (arr1[i] == arr2[i]) k++;
+                    console.log(arr1[i]);
+                    console.log(arr2[i]);
+                }
+                console.log(k);
+                if (k == arr1.length) alert("Строки являются анаграммами");
+                else alert("Строки не являются анаграммами");
+            }
+        </script>
+    </div>
+</body>
+</html>
